@@ -24,6 +24,11 @@ public class UserRepositoryImpl implements IUserRepository {
     }
 
     @Override
+    public Optional<User> findOneByEmail(String email) {
+        return iUserRepositoryJPA.findByEmail(email);
+    }
+
+    @Override
     public List<User> findAllByCompanyId(UUID companyId) {
         return iUserRepositoryJPA.findAllByCompanyId(companyId);
     }

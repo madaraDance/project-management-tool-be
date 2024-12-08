@@ -37,4 +37,15 @@ public class RoleRepositoryImpl implements IRoleRepository {
     public Optional<Role> findOneById(UUID id) {
         return iRoleRepositoryJpa.findById(id);
     }
+
+    @Override
+    public Optional<Role> findOneByNameAndCompanyId(String name, UUID companyId) {
+        return iRoleRepositoryJpa.findByNameAndCompanyId(name, companyId);
+    }
+
+    @Override
+    public List<Role> saveAll(List<Role> roles) {
+        return iRoleRepositoryJpa.saveAll(roles);
+    }
+
 }
