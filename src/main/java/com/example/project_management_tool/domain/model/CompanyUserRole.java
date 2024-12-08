@@ -13,7 +13,7 @@ import java.util.UUID;
 @Table(
     name = "company_user_role",
     uniqueConstraints = {@UniqueConstraint(
-        name = "company_user",
+        name = "uc_company_user",
         columnNames = {"company_id", "user_id"})
 })
 @Getter

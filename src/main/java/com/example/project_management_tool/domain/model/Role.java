@@ -2,6 +2,7 @@ package com.example.project_management_tool.domain.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Table(
     name = "role",
     uniqueConstraints = @UniqueConstraint(
-            name = "company_role_name",
+            name = "uc_company_role_name",
             columnNames = {"company_id", "name"})
 )
 @Getter
@@ -44,7 +45,7 @@ public class Role extends BaseEntity {
     @Column(
             name = "company_id",
             nullable = false)
-    @NotBlank
+    @NotNull
     private UUID companyId;
 
 }
