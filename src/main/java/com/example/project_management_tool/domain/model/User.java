@@ -6,7 +6,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,11 +21,12 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class User extends BaseEntity{
+public class User extends BaseEntity implements UserDetails {
 
     @Id
     @GeneratedValue(generator = "UUID")
     private UUID id;
+
     @Column(
         name = "first_name",
         nullable = false
@@ -54,12 +59,12 @@ public class User extends BaseEntity{
 
     @Column(
         name = "password",
-        nullable = false)
+        nullable = false,
+        columnDefinition = "TEXT")
     @NotBlank(message = "Password can not be empty or null.")
     @Size(
-        max = 40,
         min = 8,
-        message = "Password must be at least 8 characters and at most 40 characters")
+        message = "Password must be at least 8 characters")
     private String password;
 
     @Column(
@@ -67,4 +72,36 @@ public class User extends BaseEntity{
         nullable = false)
     private UUID companyId;
 
+    @Transient
+    private List<GrantedAuthority> authorities;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.authorities;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
