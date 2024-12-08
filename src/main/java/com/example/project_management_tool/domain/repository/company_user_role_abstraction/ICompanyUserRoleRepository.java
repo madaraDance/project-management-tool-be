@@ -1,6 +1,5 @@
 package com.example.project_management_tool.domain.repository.company_user_role_abstraction;
 
-import com.example.project_management_tool.application.dto.company_user_role.CompanyUserRoleReadDTO;
 import com.example.project_management_tool.domain.model.CompanyUserRole;
 
 import java.util.List;
