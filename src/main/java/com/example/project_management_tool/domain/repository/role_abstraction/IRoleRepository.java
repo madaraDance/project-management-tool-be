@@ -15,4 +15,8 @@ public interface IRoleRepository {
 
     Optional<Role> findOneById(UUID id);
 
+    Optional<Role> findOneByNameAndCompanyId(String name, UUID companyId);
+
+    List<Role> saveAll(List<Role> roles);
+
 }
