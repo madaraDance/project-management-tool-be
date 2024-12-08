@@ -15,7 +15,6 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = false)
 public class CompanyCreateDTO {
 
-    @NotNull
     @NotBlank
     private String companyName;
 
