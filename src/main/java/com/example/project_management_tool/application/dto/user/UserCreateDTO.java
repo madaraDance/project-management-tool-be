@@ -16,21 +16,17 @@ import java.util.UUID;
 @JsonIgnoreProperties(ignoreUnknown = false)
 public class UserCreateDTO {
 
-    @NotNull
     @NotBlank
     @Pattern(regexp = "^[a-zA-Z]+$", message = " must contain only alphabetic characters.")
     private String firstName;
 
-    @NotNull
     @NotBlank
     @Pattern(regexp = "^[a-zA-Z]+$", message = " must contain only alphabetic characters.")
     private String lastName;
 
-    @NotNull
     @NotBlank
     private String email;
 
-    @NotNull
     @NotBlank
     private String password;
 

@@ -8,11 +8,14 @@ import com.example.project_management_tool.domain.model.User;
 import com.example.project_management_tool.domain.repository.company_abstraction.ICompanyRepository;
 import com.example.project_management_tool.domain.repository.user_abstraction.IUserRepository;
 import com.example.project_management_tool.domain.service.IUserService;
+import com.example.project_management_tool.presentation.shared.error.CustomDuplicateResourceException;
 import com.example.project_management_tool.presentation.shared.error.CustomResourceNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -21,14 +24,17 @@ public class UserServiceImpl implements IUserService {
     private final UserMapper userMapper;
     private final IUserRepository iUserRepository;
     private final ICompanyRepository iCompanyRepository;
+    private final PasswordEncoder passwordEncoder;
 
 
     public UserServiceImpl(UserMapper userMapper,
                            IUserRepository iUserRepository,
-                           ICompanyRepository iCompanyRepository) {
+                           ICompanyRepository iCompanyRepository,
+                           PasswordEncoder passwordEncoder) {
         this.userMapper = userMapper;
         this.iUserRepository = iUserRepository;
         this.iCompanyRepository = iCompanyRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -56,7 +62,20 @@ public class UserServiceImpl implements IUserService {
                 .orElseThrow(() -> new CustomResourceNotFoundException("Company with id: " + companyId + " was not found"));
 
         User newUser = userMapper.userCreateDtoToUser(userCreateDto, companyId);
+
+        Optional<User> userFromDb = iUserRepository.findOneByEmail(newUser.getEmail());
+
+        if (userFromDb.isPresent()) {
+            throw new CustomDuplicateResourceException("User with given email already exists");
+        }
+
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+
+        System.out.println(newUser.getPassword());
+
         User savedUser = iUserRepository.save(newUser);
+
+
 
         return userMapper.userToUserReadDto(savedUser);
     }
