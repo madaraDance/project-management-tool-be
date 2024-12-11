@@ -27,10 +27,10 @@ public class CompanyController {
         return new ResponseEntity<>(new GlobalResponse<>(HttpStatus.OK.value(),iCompanyService.getCompanyById(id)), HttpStatus.OK);
     }
 
-    @PostMapping
+    /* @PostMapping
     public ResponseEntity<GlobalResponse<Company>> createCompany(@RequestBody CompanyCreateDTO companyCreateDTO) {
         return new ResponseEntity<>(new GlobalResponse<>(HttpStatus.CREATED.value(),iCompanyService.createCompany(companyCreateDTO)), HttpStatus.CREATED);
-    }
+    }*/
 
     @PatchMapping("/{id}")
     public ResponseEntity<GlobalResponse<Company>> updateCompany(@PathVariable @Valid UUID id, @RequestBody CompanyUpdateDTO companyUpdateDTO) {
