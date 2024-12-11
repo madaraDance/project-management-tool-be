@@ -11,6 +11,8 @@ public interface ICompanyUserRoleRepository {
 
     List<Object[]> findAllByCompanyId(UUID companyId);
 
+    Optional<CompanyUserRole> findOneByUserId(UUID userId);
+
     CompanyUserRole save(CompanyUserRole companyUserRole);
 
     void deleteById(UUID id);

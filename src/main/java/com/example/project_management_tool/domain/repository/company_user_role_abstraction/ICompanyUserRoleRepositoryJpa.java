@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -19,4 +20,6 @@ public interface ICompanyUserRoleRepositoryJpa extends JpaRepository<CompanyUser
             "WHERE cur.company_id = :companyId",
             nativeQuery = true)
     List<Object[]> findByCompanyId(@Param("companyId") UUID companyId);
+
+    Optional<CompanyUserRole> findByUserId(UUID userId);
 }

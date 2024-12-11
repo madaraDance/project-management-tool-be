@@ -9,6 +9,8 @@ import java.util.UUID;
 public interface IWorkspaceUserRoleRepository {
     Optional<WorkspaceUserRole> findOneById(UUID id);
 
+    Optional<WorkspaceUserRole> findOneByWorkspaceIdAndUserId(UUID workspaceId, UUID userId);
+
     List<WorkspaceUserRole> findAllByWorkspaceId(UUID workspaceId);
 
     WorkspaceUserRole saveWorkspaceUserRole(WorkspaceUserRole workspaceUserRole);

@@ -13,6 +13,8 @@ public interface IUserRepository {
 
     Optional<User> findOneByEmail(String email);
 
+    Optional<User> findOneByEmailAndCompanyId(String email, UUID companyId);
+
     List<User> findAllByCompanyId(UUID companyId);
 
     User save(User user);
