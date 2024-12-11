@@ -31,11 +31,18 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             throws ServletException, IOException, java.io.IOException {
         try {
             String authHeader = request.getHeader("Authorization");
+            String workspaceHeader = request.getHeader("WorkspaceId");
             String token = null;
             String username = null;
+            UUID companyId = null;
+            UUID workspaceId = null;
+
+            UUID companyIdFromURI = UUID.fromString(request.getRequestURI().split("/")[2]) ;
+
             if (authHeader != null && authHeader.startsWith("Bearer ")) {
                 token = authHeader.substring(7);
                 username = jwtHelper.extractUserEmail(token);
+                companyId = jwtHelper.extractCompanyId(token);
             }
 
             if (token == null) {
@@ -43,10 +50,17 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 return;
             }
 
+            if (!companyIdFromURI.equals(companyId)){{
+                filterChain.doFilter(request, response);
+                return;
+            }}
 
-            //String workspaceId = request.getHeader("workspace_id");
+            if (workspaceHeader != null) {
+                workspaceId = UUID.fromString(workspaceHeader);
+            }
+
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username);//loadUserAndAuthByUsername(username, UUID.fromString(workspaceId));
+                UserDetails userDetails = userDetailsService.loadUserAndAuthoritiesByUsername(username, workspaceId);
                 if (jwtHelper.isTokenValid(token, userDetails)) {
                     UsernamePasswordAuthenticationToken authenticationToken =
                             new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

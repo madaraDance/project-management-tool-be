@@ -9,10 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Function;
 
 @Component
@@ -22,6 +19,10 @@ public class JwtHelper {
 
     public String extractUserEmail(String token) {
         return extractClaim(token, Claims::getSubject);
+    }
+
+    public UUID extractCompanyId(String token) {
+        return UUID.fromString(extractClaim(token, claims -> claims.get("companyId").toString()));
     }
 
     public Date extractIssuedAt(String token) {
@@ -38,8 +39,12 @@ public class JwtHelper {
         return usernameMatch && !tokenIsExpired;
     }
 
-    public String generateToken(UserDetails userDetails) {
-        return this.generateToken(new HashMap<>(), userDetails);
+    public String generateToken(UserDetails userDetails, UUID companyId) {
+        Map<String, Object> extraClaims = new HashMap<>();
+        System.out.println(companyId);
+        System.out.println("=============================================");
+        extraClaims.put("companyId", companyId.toString());
+        return this.generateToken(extraClaims, userDetails);
     }
 
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {

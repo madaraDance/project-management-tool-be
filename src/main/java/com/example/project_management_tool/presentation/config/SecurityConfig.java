@@ -3,6 +3,7 @@ package com.example.project_management_tool.presentation.config;
 import com.example.project_management_tool.application.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -42,6 +43,8 @@ public class SecurityConfig {
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/auth/signup", "auth/login").permitAll()
+                            .requestMatchers(HttpMethod.GET,"/companies").hasAuthority("COMPANY_READ")
+                            .requestMatchers(HttpMethod.PATCH, "/companies").hasAuthority("COMPANY_UPDATE")
                             .anyRequest().authenticated();
                 })
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
