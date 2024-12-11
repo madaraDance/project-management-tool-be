@@ -42,9 +42,31 @@ public class SecurityConfig {
                 .cors(cors -> cors.disable())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/auth/signup", "auth/login").permitAll()
+                    auth.requestMatchers(
+                            "/auth/signup",
+                            "auth/login",
+                            "/swagger-ui/**",
+                            "/v3/api-docs/**"
+                            ).permitAll()
                             .requestMatchers(HttpMethod.GET,"/companies").hasAuthority("COMPANY_READ")
                             .requestMatchers(HttpMethod.PATCH, "/companies").hasAuthority("COMPANY_UPDATE")
+                            .requestMatchers(HttpMethod.GET, "/companies/{companyId}/managers").hasAuthority("MANAGER_READ")
+                            .requestMatchers(HttpMethod.POST, "/companies/{companyId}/managers").hasAuthority("MANAGER_CREATE")
+                            .requestMatchers(HttpMethod.PATCH, "/companies/{companyId}/managers").hasAuthority("MANAGER_UPDATE")
+                            .requestMatchers(HttpMethod.DELETE, "/companies/{companyId}/managers").hasAuthority("MANAGER_DELETE")
+                            .requestMatchers(HttpMethod.GET, "/companies/{companyId}/roles").hasAuthority("ROLE_READ")
+                            .requestMatchers(HttpMethod.POST, "/companies/{companyId}/roles").hasAuthority("ROLE_CREATE")
+                            .requestMatchers(HttpMethod.PATCH, "/companies/{companyId}/roles").hasAuthority("ROLE_UPDATE")
+                            .requestMatchers(HttpMethod.DELETE, "/companies/{companyId}/roles").hasAuthority("ROLE_DELETE")
+                            .requestMatchers(HttpMethod.GET, "/companies/{companyId}/users").hasAuthority("USER_READ")
+                            .requestMatchers(HttpMethod.POST, "/companies/{companyId}/users").hasAuthority("USER_CREATE")
+                            .requestMatchers(HttpMethod.PATCH, "/companies/{companyId}/users").hasAuthority("USER_UPDATE")
+                            .requestMatchers(HttpMethod.DELETE, "/companies/{companyId}/users").hasAuthority("USER_DELETE")
+                            .requestMatchers(HttpMethod.GET, "/companies/{companyId}/workspaces").hasAuthority("WORKSPACE_READ")
+                            .requestMatchers(HttpMethod.POST, "/companies/{companyId}/workspaces").hasAuthority("WORKSPACE_CREATE")
+                            .requestMatchers(HttpMethod.PATCH, "/companies/{companyId}/workspaces").hasAuthority("WORKSPACE_UPDATE")
+                            .requestMatchers(HttpMethod.DELETE, "/companies/{companyId}/workspaces").hasAuthority("WORKSPACE_DELETE")
+
                             .anyRequest().authenticated();
                 })
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
