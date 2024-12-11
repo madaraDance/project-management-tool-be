@@ -39,6 +39,11 @@ public class RolePermissionRepositoryImpl implements IRolePermissionRepository {
     }
 
     @Override
+    public List<String> findPermissionNamesByRoleId(UUID roleId) {
+        return iRolePermissionRepositoryJpa.findPermissionNamesByRoleId(roleId);
+    }
+
+    @Override
     public void deleteById(UUID id) {
         iRolePermissionRepositoryJpa.deleteById(id);
     }

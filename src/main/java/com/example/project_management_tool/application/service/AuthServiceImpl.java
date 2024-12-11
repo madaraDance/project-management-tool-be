@@ -48,11 +48,11 @@ public class AuthServiceImpl implements IAuthService {
     public SignupReadDTO signup(SignupDTO signupDTO) {
         Company savedCompany = iCompanyService.createCompany(signupDTO.getCompanyCreateDTO());
 
-        UserReadDTO newUser = iUserService.createUser(savedCompany.getId(), signupDTO.getUserCreateDTO());
+        UserReadDTO savedUser = iUserService.createUser(savedCompany.getId(), signupDTO.getUserCreateDTO());
 
-        initializer.initializeSystemRolesForCompany(savedCompany.getId());
+        initializer.initializeSystemRolesForCompany(savedUser.getId(), savedCompany.getId());
 
-        return new SignupReadDTO(newUser, savedCompany);
+        return new SignupReadDTO(savedUser, savedCompany);
 
     }
 
@@ -61,7 +61,7 @@ public class AuthServiceImpl implements IAuthService {
                 .findOneByEmail(loginDTO.getEmail())
                 .orElseThrow(() -> new CustomResourceNotFoundException("User with email: " + loginDTO.getEmail() + " was not found"));
 
-        return jwtHelper.generateToken(userFromDb);
+        return jwtHelper.generateToken(userFromDb, userFromDb.getCompanyId());
     }
 
 }
