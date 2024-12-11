@@ -14,6 +14,7 @@ import com.example.project_management_tool.domain.repository.user_abstraction.IU
 import com.example.project_management_tool.domain.service.ICompanyUserRoleService;
 import com.example.project_management_tool.presentation.shared.error.CustomResourceNotFoundException;
 import com.example.project_management_tool.presentation.shared.error.CustomSystemRoleRequiredException;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -122,7 +123,7 @@ public class CompanyUserRoleServiceImpl implements ICompanyUserRoleService {
 
     @Override
     public void delete(UUID id) {
-        iCompanyUserRoleRepository
+        CompanyUserRole companyUserRole = iCompanyUserRoleRepository
                 .findOneById(id)
                 .orElseThrow(() -> new CustomResourceNotFoundException("Company user role with id: " + id + " was not found."));
 

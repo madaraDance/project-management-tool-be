@@ -41,7 +41,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.iCompanyUserRoleRepository = iCompanyUserRoleRepository;
     }
 
-   public UserDetails loadUserAndAuthoritiesByUsername(String username, UUID workspaceId) {
+    public UserDetails loadUserAndAuthoritiesByUsername(String username, UUID workspaceId) {
        User user = iUserRepository
                .findOneByEmail(username)
                .orElseThrow(() -> new CustomResourceNotFoundException("User with email: " + username + " was not found."));
