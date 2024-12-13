@@ -20,4 +20,6 @@ public interface IRolePermissionRepository {
     List<String> findPermissionNamesByRoleId(UUID roleId);
 
     void deleteById(UUID id);
+
+    void deleteAll();
 }

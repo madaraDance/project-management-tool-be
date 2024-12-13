@@ -15,5 +15,4 @@ public interface IPermissionRepository {
 
     void saveAll(List<Permission> permissions);
 
-
 }

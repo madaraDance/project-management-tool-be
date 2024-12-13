@@ -14,4 +14,6 @@ public interface IWorkspaceRepository {
     Workspace save(Workspace workspace);
 
     void deleteById(UUID id);
+
+    void deleteAll();
 }

@@ -19,5 +19,9 @@ public interface IUserRepository {
 
     User save(User user);
 
+    List<User> saveAll(List<User> users);
+
     void deleteById(UUID id);
+
+    void deleteAll();
 }

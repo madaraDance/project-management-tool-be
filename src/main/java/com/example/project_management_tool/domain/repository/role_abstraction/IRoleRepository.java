@@ -19,4 +19,6 @@ public interface IRoleRepository {
 
     List<Role> saveAll(List<Role> roles);
 
+    void deleteAll();
+
 }

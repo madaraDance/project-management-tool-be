@@ -16,4 +16,6 @@ public interface ICompanyUserRoleRepository {
     CompanyUserRole save(CompanyUserRole companyUserRole);
 
     void deleteById(UUID id);
+
+    void deleteAll();
 }

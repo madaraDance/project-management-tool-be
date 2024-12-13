@@ -17,7 +17,7 @@ public interface IWorkspaceUserRoleRepository {
 
     WorkspaceUserRole saveWorkspaceUserRole(WorkspaceUserRole workspaceUserRole);
 
-
+    void deleteALl();
 
     void deleteWorkspaceUserRoleById(UUID id);
 }
