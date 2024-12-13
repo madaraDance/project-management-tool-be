@@ -38,8 +38,8 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<GlobalResponse<Void>> deleteUserForCompany(@PathVariable @Valid UUID id) {
+    public ResponseEntity<GlobalResponse<String>> deleteUserForCompany(@PathVariable @Valid UUID id) {
         iUserService.deleteUser(id);
-        return new ResponseEntity<>(new GlobalResponse<>(HttpStatus.NO_CONTENT.value(), null), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(new GlobalResponse<>(HttpStatus.OK.value(), "User deleted."), HttpStatus.OK);
     }
 }
