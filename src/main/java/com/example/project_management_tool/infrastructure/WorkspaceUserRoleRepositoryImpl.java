@@ -34,6 +34,11 @@ public class WorkspaceUserRoleRepositoryImpl implements IWorkspaceUserRoleReposi
     }
 
     @Override
+    public List<Object[]> findAllByCompanyId(UUID companyId) {
+        return iWorkspaceUserRoleRepositoryJpa.findByCompanyId(companyId);
+    }
+
+    @Override
     public WorkspaceUserRole saveWorkspaceUserRole(WorkspaceUserRole workspaceUserRole) {
         return iWorkspaceUserRoleRepositoryJpa.save(workspaceUserRole);
     }

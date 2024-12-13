@@ -13,7 +13,11 @@ public interface IWorkspaceUserRoleRepository {
 
     List<WorkspaceUserRole> findAllByWorkspaceId(UUID workspaceId);
 
+    List<Object[]> findAllByCompanyId(UUID companyId);
+
     WorkspaceUserRole saveWorkspaceUserRole(WorkspaceUserRole workspaceUserRole);
+
+
 
     void deleteWorkspaceUserRoleById(UUID id);
 }
