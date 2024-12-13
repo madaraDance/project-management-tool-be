@@ -12,10 +12,8 @@ import lombok.*;
 @JsonIgnoreProperties(ignoreUnknown = false)
 public class UserUpdateDTO {
 
-    @Pattern(regexp = "^[a-zA-Z]+$", message = "must contain only alphabetic characters.")
     private String firstName;
 
-    @Pattern(regexp = "^[a-zA-Z]+$", message = "must contain only alphabetic characters.")
     private String lastName;
 
     private String password;

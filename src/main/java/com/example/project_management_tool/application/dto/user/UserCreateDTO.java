@@ -17,11 +17,9 @@ import java.util.UUID;
 public class UserCreateDTO {
 
     @NotBlank
-    @Pattern(regexp = "^[a-zA-Z]+$", message = " must contain only alphabetic characters.")
     private String firstName;
 
     @NotBlank
-    @Pattern(regexp = "^[a-zA-Z]+$", message = " must contain only alphabetic characters.")
     private String lastName;
 
     @NotBlank
