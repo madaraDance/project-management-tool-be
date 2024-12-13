@@ -37,4 +37,9 @@ public class WorkspaceRepositoryImpl implements IWorkspaceRepository {
     public void deleteById(UUID id) {
         iWorkspaceRepositoryJpa.deleteById(id);
     }
+
+    @Override
+    public void deleteAll() {
+        iWorkspaceRepositoryJpa.deleteAll();
+    }
 }

@@ -48,4 +48,9 @@ public class RoleRepositoryImpl implements IRoleRepository {
         return iRoleRepositoryJpa.saveAll(roles);
     }
 
+    @Override
+    public void deleteAll() {
+        iRoleRepositoryJpa.deleteAll();
+    }
+
 }

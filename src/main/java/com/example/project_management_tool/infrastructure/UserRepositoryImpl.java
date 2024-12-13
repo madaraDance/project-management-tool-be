@@ -44,7 +44,17 @@ public class UserRepositoryImpl implements IUserRepository {
     }
 
     @Override
+    public List<User> saveAll(List<User> users) {
+        return iUserRepositoryJPA.saveAll(users);
+    }
+
+    @Override
     public void deleteById(UUID id) {
         iUserRepositoryJPA.deleteById(id);
+    }
+
+    @Override
+    public void deleteAll() {
+        iUserRepositoryJPA.deleteAll();
     }
 }

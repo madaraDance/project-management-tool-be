@@ -47,4 +47,9 @@ public class RolePermissionRepositoryImpl implements IRolePermissionRepository {
     public void deleteById(UUID id) {
         iRolePermissionRepositoryJpa.deleteById(id);
     }
+
+    @Override
+    public void deleteAll() {
+        iRolePermissionRepositoryJpa.deleteAll();
+    }
 }

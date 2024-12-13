@@ -42,4 +42,9 @@ public class CompanyUserRoleRepositoryImpl implements ICompanyUserRoleRepository
     public void deleteById(UUID id) {
         iCompanyUserRoleRepositoryJpa.deleteById(id);
     }
+
+    @Override
+    public void deleteAll() {
+        iCompanyUserRoleRepositoryJpa.deleteAll();
+    }
 }

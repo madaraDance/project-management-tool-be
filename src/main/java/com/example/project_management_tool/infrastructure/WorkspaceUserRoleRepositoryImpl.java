@@ -44,6 +44,11 @@ public class WorkspaceUserRoleRepositoryImpl implements IWorkspaceUserRoleReposi
     }
 
     @Override
+    public void deleteALl() {
+        iWorkspaceUserRoleRepositoryJpa.deleteAll();
+    }
+
+    @Override
     public void deleteWorkspaceUserRoleById(UUID id) {
         iWorkspaceUserRoleRepositoryJpa.findById(id);
     }
