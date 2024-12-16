@@ -18,4 +18,5 @@ public interface ICompanyUserRoleRepository {
     void deleteById(UUID id);
 
     void deleteAll();
+
 }
