@@ -89,15 +89,14 @@ public class CompanyUserRoleServiceImpl implements ICompanyUserRoleService {
                 .findOneById(companyUserRoleToSave.getRoleId())
                 .orElseThrow(() -> new CustomResourceNotFoundException("Role with id: " + companyUserRoleToSave.getRoleId() + " was not found."));
 
-        if (!roleFromDb.getIsSystemRole()) {
-            throw new CustomSystemRoleRequiredException("Role with id: " + roleFromDb.getId() + " is not a System Role.");
-        }
         CompanyUserRole companyUserRoleFromDb = iCompanyUserRoleRepository.save(companyUserRoleToSave);
         return companyUserRoleMapper.mapCompanyUserRoleToReadDto(
                 companyUserRoleFromDb.getId(),
                 userFromDb,
                 roleFromDb);
     }
+
+    //TODO FOR UPDATE AND DELETE ENSURE THAT COMPANY ALWAYS HAS ATLEAST ONE OWNER.
 
     @Override
     public CompanyUserRoleReadDTO update(UUID id, CompanyUserRoleUpdateDTO companyUserRoleUpdateDTO) {
@@ -112,10 +111,6 @@ public class CompanyUserRoleServiceImpl implements ICompanyUserRoleService {
         Role roleFromDb = iRoleRepository
                 .findOneById(companyUserRoleToSave.getRoleId())
                 .orElseThrow(() -> new CustomResourceNotFoundException("Role with id: " + companyUserRoleToSave.getRoleId() + " was not found."));
-
-        if (!roleFromDb.getIsSystemRole()) {
-            throw new CustomSystemRoleRequiredException("Role with id: " + roleFromDb.getId() + " is not a System Role.");
-        }
 
         iCompanyUserRoleRepository.save(companyUserRoleToSave);
         return companyUserRoleMapper.mapCompanyUserRoleToReadDto(id, userFromDb, roleFromDb);

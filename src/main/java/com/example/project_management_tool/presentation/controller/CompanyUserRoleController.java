@@ -43,8 +43,9 @@ public class CompanyUserRoleController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<GlobalResponse<CompanyUserRole>> deleteCompanyManager(@PathVariable @Valid UUID id) {
-        return new ResponseEntity<>(new GlobalResponse<>(HttpStatus.NO_CONTENT.value(), iCompanyUserRoleService.getCompanyUserRoleById(id)), HttpStatus.NO_CONTENT);
+    public ResponseEntity<GlobalResponse<String>> deleteCompanyManager(@PathVariable @Valid UUID id) {
+        iCompanyUserRoleService.getCompanyUserRoleById(id);
+        return new ResponseEntity<>(new GlobalResponse<>(HttpStatus.OK.value(), "Company manager was deleted."), HttpStatus.OK);
     }
 
 }
