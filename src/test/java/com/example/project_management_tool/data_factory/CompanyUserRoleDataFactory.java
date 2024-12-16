@@ -60,6 +60,21 @@ public class CompanyUserRoleDataFactory {
         );
     }
 
+    public CompanyUserRole createCompanyUserRole(UUID userId, UUID companyId, UUID roleId, boolean doSave) {
+        CompanyUserRole cur = CompanyUserRole.builder()
+                .userId(userId)
+                .companyId(companyId)
+                .roleId(roleId)
+                .build();
+
+        if (doSave) {
+            return iCompanyUserRoleRepository.save(cur);
+        }
+
+        return cur;
+
+    }
+
     public void deleteAll() {
         iCompanyUserRoleRepository.deleteAll();
         iRolePermissionRepository.deleteAll();
