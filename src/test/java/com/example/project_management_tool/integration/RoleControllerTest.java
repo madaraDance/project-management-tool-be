@@ -75,7 +75,7 @@ public class RoleControllerTest extends AbstractIntegrationTest{
 
         CompanyUserRole cur = companyUserRoleDataFactory.createOwnerRoleWithPermissionsForUser(user.getId(), companyId);
 
-        Role role = iRoleRepository.save(Role.builder().companyId(companyId).isSystemRole(false).name("BLYAAAAAA").build());
+        Role role = iRoleRepository.save(Role.builder().companyId(companyId).isSystemRole(false).name("SOME_ROLE").build());
 
         roleId = role.getId();
 
