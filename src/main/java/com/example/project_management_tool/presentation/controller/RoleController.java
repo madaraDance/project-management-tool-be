@@ -40,10 +40,10 @@ public class RoleController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<GlobalResponse<Void>> deleteRole(@PathVariable @Valid UUID id){
+    public ResponseEntity<GlobalResponse<String>> deleteRole(@PathVariable @Valid UUID id){
         iRoleService.deleteRole(id);
 
-        return new ResponseEntity<>(new GlobalResponse<>(HttpStatus.NO_CONTENT.value(), null), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(new GlobalResponse<>(HttpStatus.OK.value(), "Role deleted."), HttpStatus.OK);
     }
 
 
