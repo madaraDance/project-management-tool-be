@@ -37,7 +37,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             UUID companyId = null;
             UUID workspaceId = null;
 
-            UUID companyIdFromURI = UUID.fromString(request.getRequestURI().split("/")[2]) ;
 
             if (authHeader != null && authHeader.startsWith("Bearer ")) {
                 token = authHeader.substring(7);
@@ -49,6 +48,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 filterChain.doFilter(request, response);
                 return;
             }
+
+            UUID companyIdFromURI = UUID.fromString(request.getRequestURI().split("/")[2]);
 
             if (!companyIdFromURI.equals(companyId)){{
                 filterChain.doFilter(request, response);
