@@ -32,8 +32,8 @@ public class Role extends BaseEntity {
         name = "name",
         nullable = false)
     @Size(
-            max = 20,
-            message = "Name must be at most 20 characters")
+            max = 40,
+            message = "Name must be at most 40 characters")
     @NotBlank
     private String name;
 
