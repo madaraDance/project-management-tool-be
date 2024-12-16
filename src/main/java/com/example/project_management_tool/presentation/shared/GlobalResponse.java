@@ -2,6 +2,7 @@ package com.example.project_management_tool.presentation.shared;
 
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
