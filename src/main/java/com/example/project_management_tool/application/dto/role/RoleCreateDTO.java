@@ -4,20 +4,18 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = false)
 public class RoleCreateDTO {
 
     @NotBlank
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z ]+$", message = " must contain only alphabetic characters and spaces.")
+    @Pattern(regexp = "^[A-Z_]+$", message = " must contain only uppercase letters and underscores.")
     private String name;
 }
